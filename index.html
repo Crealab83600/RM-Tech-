@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CodeCampus - Solutions informatiques par Raphael Maury</title>
+  <title>CodeCampus - Raphael Maury | Solutions informatiques</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   
@@ -12,50 +12,61 @@
 
   <style>
     /* RESET & GLOBAL */
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family: 'Roboto', sans-serif; line-height:1.6; color:#333; background:#f0f2f5; }
+    * { margin:0; padding:0; box-sizing:border-box; transition: all 0.3s ease; }
+    body { font-family:'Roboto',sans-serif; line-height:1.6; color:#333; background:#f5f6fa; scroll-behavior:smooth; }
     a { text-decoration:none; color:inherit; }
     h1,h2,h3 { color:#1e1e2f; }
-    section { padding:80px 20px; max-width:1100px; margin:auto; }
+    section { padding:80px 20px; max-width:1100px; margin:auto; opacity:0; transform: translateY(50px); transition: all 0.8s ease-out; }
+    section.visible { opacity:1; transform: translateY(0); }
     p { color:#555; }
 
     /* HEADER */
-    header { background:#222; color:#fff; position:sticky; top:0; z-index:1000; }
+    header { background:#222; color:#fff; position:sticky; top:0; z-index:1000; box-shadow:0 3px 10px rgba(0,0,0,0.1); }
     header .container { display:flex; justify-content:space-between; align-items:center; padding:15px 20px; flex-wrap:wrap; }
     header h1 { font-size:2rem; display:flex; align-items:center; gap:10px; }
     header h1 img { width:40px; height:40px; }
-    nav a { margin:0 15px; font-weight:600; color:#fff; transition:color 0.3s; }
+    nav a { margin:0 15px; font-weight:600; color:#fff; }
     nav a:hover { color:#00d4ff; }
 
+    /* DARK/LIGHT TOGGLE */
+    .toggle-button { cursor:pointer; padding:5px 12px; border-radius:20px; border:none; font-weight:bold; background:#00d4ff; color:#fff; }
+    .dark-mode { background:#121212; color:#e0e0e0; }
+    .dark-mode header { background:#1b1b1b; }
+    .dark-mode footer { background:#1b1b1b; }
+
     /* HERO */
-    #home { text-align:center; padding-top:120px; background: linear-gradient(135deg,#00d4ff33,#ff7c7c33); border-radius:12px; }
-    #home p { margin-top:20px; font-size:1.1rem; max-width:700px; margin-left:auto; margin-right:auto; }
+    #home { text-align:center; padding:120px 20px; background: linear-gradient(135deg,#00d4ff33,#ff7c7c33); border-radius:12px; }
+    #home h2 { font-size:2.4rem; margin-bottom:15px; }
+    #home p { margin-top:20px; font-size:1.2rem; max-width:750px; margin-left:auto; margin-right:auto; }
 
     /* ABOUT */
-    #about { display:flex; flex-wrap:wrap; gap:20px; align-items:center; justify-content:center; margin-top:50px; }
+    #about { display:flex; flex-wrap:wrap; gap:30px; align-items:center; justify-content:center; margin-top:50px; }
     #about .text { flex:1; min-width:300px; }
-    #about .text p { margin-top:10px; }
+    #about .text p { margin-top:15px; font-size:1.05rem; }
     #about .avatar { flex:1; min-width:250px; text-align:center; }
-    #about .avatar img { width:200px; border-radius:50%; border:3px solid #00d4ff; }
+    #about .avatar img { width:200px; border-radius:50%; border:3px solid #00d4ff; transition: transform 0.3s; }
+    #about .avatar img:hover { transform: scale(1.08); }
 
     /* SERVICES / OFFRES */
-    .services-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px; margin-top:40px; }
-    .service-card { background:#fff; padding:25px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.1); transition:transform 0.3s, box-shadow 0.3s; text-align:center; }
-    .service-card:hover { transform:translateY(-5px); box-shadow:0 6px 18px rgba(0,0,0,0.15); }
-    .service-card i { font-size:2rem; color:#00d4ff; margin-bottom:10px; }
-    .price { font-weight:bold; font-size:1.2rem; color:#00d4ff; margin-top:10px; }
-
+    .services-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:30px; margin-top:50px; }
+    .service-card { background:#fff; padding:25px; border-radius:16px; box-shadow:0 5px 15px rgba(0,0,0,0.1); text-align:center; display:flex; flex-direction:column; justify-content:space-between; opacity:0; transform: translateY(50px); transition: all 0.6s ease, transform 0.4s; }
+    .service-card.visible { opacity:1; transform:translateY(0); }
+    .service-card:hover { transform: translateY(-10px) scale(1.05); box-shadow:0 12px 25px rgba(0,212,255,0.3); border:1px solid #00d4ff; }
+    .service-card i { font-size:2.4rem; color:#00d4ff; margin-bottom:12px; transition: transform 0.4s, color 0.3s; }
+    .service-card i:hover { transform: rotate(20deg); color:#ff7c7c; }
+    .service-card h3 { margin-bottom:10px; font-size:1.4rem; }
+    .price { font-weight:bold; font-size:1.25rem; color:#00d4ff; margin-top:10px; margin-bottom:10px; }
     .service-card ul { text-align:left; margin-top:10px; padding-left:20px; }
-    .service-card ul li { margin-bottom:5px; }
+    .service-card ul li { margin-bottom:8px; }
 
     /* CONTACT */
-    .contact-form { background:#fff; padding:30px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.1); max-width:600px; margin:auto; }
-    .contact-form input, .contact-form textarea { width:100%; padding:12px; margin:10px 0; border-radius:6px; border:1px solid #ccc; }
-    .contact-form button { padding:12px 25px; border:none; border-radius:6px; background:#00d4ff; color:#fff; font-weight:bold; cursor:pointer; transition:background 0.3s; }
-    .contact-form button:hover { background:#00a2cc; }
+    .contact-form { background:#fff; padding:40px; border-radius:16px; box-shadow:0 5px 15px rgba(0,0,0,0.1); max-width:700px; margin:auto; }
+    .contact-form input, .contact-form textarea { width:100%; padding:14px; margin:12px 0; border-radius:8px; border:1px solid #ccc; font-size:1rem; }
+    .contact-form button { padding:14px 28px; border:none; border-radius:8px; background:#00d4ff; color:#fff; font-weight:bold; cursor:pointer; transition: all 0.3s; font-size:1rem; }
+    .contact-form button:hover { background:#00a2cc; transform: scale(1.05); }
 
     /* FOOTER */
-    footer { background:#222; color:#fff; text-align:center; padding:25px 10px; margin-top:50px; }
+    footer { background:#222; color:#fff; text-align:center; padding:30px 10px; margin-top:60px; font-size:0.95rem; }
 
     /* RESPONSIVE */
     @media(max-width:768px){
@@ -75,11 +86,12 @@
       <a href="#about">À propos</a>
       <a href="#services">Offres</a>
       <a href="#contact">Contact</a>
+      <button class="toggle-button" id="toggleMode">🌙</button>
     </nav>
   </div>
 </header>
 
-<section id="home">
+<section id="home" class="visible">
   <h2>Bienvenue chez CodeCampus</h2>
   <p>Solutions informatiques pour étudiants et particuliers. J’aide les élèves à mieux comprendre et utiliser leurs outils numériques, créer des projets scolaires, automatiser leurs tâches et réussir leurs cours.</p>
 </section>
@@ -90,31 +102,33 @@
   </div>
   <div class="text">
     <h2>À propos de moi</h2>
-    <p>Je m'appelle Raphael Maury, j'ai 17 ans et je suis passionné par l'informatique depuis toujours. J'aime coder, créer et aider les autres à comprendre le numérique. Mon objectif : rendre l'informatique utile et accessible pour tous les élèves.</p>
+    <p>Je m'appelle Raphael Maury, j'ai 17 ans et je suis passionné par l'informatique depuis toujours. J'adore coder, créer et aider les autres à mieux comprendre le numérique. Mon objectif : rendre l’informatique accessible et utile pour tous les élèves.</p>
   </div>
 </section>
 
 <section id="services">
-  <h2>Mes Offres</h2>
+  <h2>Mes Offres Détaillées</h2>
   <div class="services-grid">
     <div class="service-card">
       <i class="fas fa-laptop-code"></i>
       <h3>Mini-projets scolaires</h3>
       <p class="price">20€</p>
       <ul>
-        <li>Création d’un petit programme ou site web</li>
-        <li>Support et explication du code</li>
-        <li>Livraison en 2-3 jours</li>
+        <li>Développement d’un petit programme, jeu ou site web</li>
+        <li>Explications détaillées du code</li>
+        <li>Livraison rapide (2-3 jours)</li>
+        <li>Support pour modifications simples</li>
       </ul>
     </div>
     <div class="service-card">
       <i class="fas fa-check-circle"></i>
-      <h3>Correction & aide aux devoirs</h3>
+      <h3>Correction & Aide aux devoirs</h3>
       <p class="price">15€ / devoir</p>
       <ul>
-        <li>Relecture complète du projet</li>
+        <li>Relecture complète</li>
         <li>Conseils d’amélioration</li>
-        <li>Explications détaillées pour apprendre</li>
+        <li>Explications détaillées</li>
+        <li>Retour rapide</li>
       </ul>
     </div>
     <div class="service-card">
@@ -122,9 +136,10 @@
       <h3>Automatisation</h3>
       <p class="price">25€</p>
       <ul>
-        <li>Script pour Excel ou Google Sheets</li>
+        <li>Scripts pour Excel/Google Sheets</li>
         <li>Automatisation des calculs et suivis</li>
         <li>Documentation incluse</li>
+        <li>Assistance pour modifications futures</li>
       </ul>
     </div>
     <div class="service-card">
@@ -133,28 +148,31 @@
       <p class="price">10€ / fiche</p>
       <ul>
         <li>Fiches synthétiques PDF ou PowerPoint</li>
-        <li>Claires et prêtes à l’emploi</li>
-        <li>Optimisées pour réviser rapidement</li>
+        <li>Résumé clair et prêt à l’emploi</li>
+        <li>Optimisé pour révisions rapides</li>
+        <li>Graphiques inclus si nécessaire</li>
       </ul>
     </div>
     <div class="service-card">
       <i class="fas fa-th-large"></i>
-      <h3>Templates</h3>
+      <h3>Templates prêts à l’emploi</h3>
       <p class="price">5€ / template</p>
       <ul>
-        <li>Templates PowerPoint, Canva ou fiches</li>
-        <li>Prêts à l’emploi</li>
-        <li>Personnalisables facilement</li>
+        <li>Templates PowerPoint/Canva</li>
+        <li>Design moderne et clair</li>
+        <li>Facilement personnalisables</li>
+        <li>Gain de temps immédiat</li>
       </ul>
     </div>
     <div class="service-card">
       <i class="fas fa-chalkboard-teacher"></i>
-      <h3>Cours & tutoriels</h3>
+      <h3>Cours & tutoriels personnalisés</h3>
       <p class="price">30€ / session</p>
       <ul>
-        <li>Tutoriels personnalisés en Python, HTML/CSS ou Scratch</li>
-        <li>Support en direct pour poser vos questions</li>
-        <li>Accès aux exercices pratiques</li>
+        <li>Tutoriels Python, HTML/CSS, Scratch</li>
+        <li>Support direct pour questions</li>
+        <li>Exercices pratiques inclus</li>
+        <li>Session adaptée à votre niveau</li>
       </ul>
     </div>
   </div>
@@ -162,7 +180,7 @@
 
 <section id="contact">
   <h2>Contact</h2>
-  <p>Disponible pour aider élèves et particuliers à tirer le meilleur de leurs outils numériques.</p>
+  <p>Disponible pour aider élèves et particuliers à tirer le meilleur de leurs outils numériques. Contactez-moi pour vos projets ou questions !</p>
   <form class="contact-form" action="mailto:raphaelmaury83600@gmail.com" method="post" enctype="text/plain">
     <input type="text" placeholder="Votre nom" name="Nom" required>
     <input type="email" placeholder="Votre email" name="Email" required>
@@ -174,6 +192,32 @@
 <footer>
   <p>&copy; 2026 CodeCampus - Raphael Maury. Tous droits réservés.</p>
 </footer>
+
+<script>
+  // Reveal sections and cards on scroll
+  const sections = document.querySelectorAll('section');
+  const cards = document.querySelectorAll('.service-card');
+  function revealOnScroll() {
+    const windowHeight = window.innerHeight;
+    sections.forEach(section => {
+      const top = section.getBoundingClientRect().top;
+      if(top < windowHeight - 100) section.classList.add('visible');
+    });
+    cards.forEach(card => {
+      const top = card.getBoundingClientRect().top;
+      if(top < windowHeight - 100) card.classList.add('visible');
+    });
+  }
+  window.addEventListener('scroll', revealOnScroll);
+  window.addEventListener('load', revealOnScroll);
+
+  // Dark/Light toggle
+  const toggleBtn = document.getElementById('toggleMode');
+  toggleBtn.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    toggleBtn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+  });
+</script>
 
 </body>
 </html>
